@@ -194,6 +194,25 @@ Likewise you might need to get data and services from the Jellyfin core, Jellyfi
 
 - [See blog post](https://jellyfin.org/posts/plugin-updates/)
 
+## 5.1. Package the Plugin
+
+The template includes a Python packager that builds the plugin, generates `meta.json`, and creates an installable zip archive.
+
+```shell
+python3 package.py --version 1.0.0.0 --output dist
+```
+
+This produces:
+
+- `dist/<plugin-name>-<version>.zip` for installation
+- `dist/meta.json` for repository use
+
+You can override the build configuration and target framework if needed:
+
+```shell
+python3 package.py --version 1.0.0.0 --configuration Release --framework net9.0 --output dist
+```
+
 ## 6. Set Up Debugging
 
 Debugging can be set up by creating tasks which will be executed when running the plugin project. The specifics on setting up these tasks are not included as they may differ from IDE to IDE. The following list describes the general process:

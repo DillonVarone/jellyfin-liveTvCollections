@@ -1,16 +1,16 @@
 ---
-name: "Template"
-guid: "eb5d7894-8eef-4b36-aa6f-5d124e828ce1"
+name: "Live TV Collections"
+guid: "06fee675-cb6d-45c6-8f22-9fd1d5e122c0"
 version: "1.0.0.0"
 targetAbi: "10.11.0.0"
 framework: "net9.0"
-overview: "Short description about your plugin"
+overview: "Groups M3U Live TV channels into collections by group-title."
 description: >
-  This is a longer description that can span more than one
-  line and include details about your plugin.
-category: "General"
+  Creates collections named TV - <group-title> from M3U Live TV channels
+  and keeps them synchronized after Live TV refreshes.
+category: "Live TV"
 owner: "jellyfin"
 artifacts:
 - "Jellyfin.Plugin.Template.dll"
 changelog: >
-  changelog
+  Initial release.
