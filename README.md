@@ -196,21 +196,24 @@ Likewise you might need to get data and services from the Jellyfin core, Jellyfi
 
 ## 5.1. Package the Plugin
 
-The template includes a Python packager that builds the plugin, generates `meta.json`, and creates an installable zip archive.
+The template includes a Python packager that builds the plugin, generates the installable zip archive, and writes a Jellyfin repository `manifest.json`.
 
 ```shell
-python3 package.py --version 1.0.0.0 --output dist
+python3 package.py --version 1.0.0.0 --source-url https://example.com/live-tv-collections-1.0.0.0.zip --output dist
 ```
+
+If you omit `--source-url`, the packager derives it from `git remote origin` and assumes the release asset will be published for the matching tag.
 
 This produces:
 
 - `dist/<plugin-name>-<version>.zip` for installation
-- `dist/meta.json` for repository use
+- `build/manifest.json` for Jellyfin's plugin repository index
+- `dist/meta.json` for the plugin package metadata inside the zip
 
 You can override the build configuration and target framework if needed:
 
 ```shell
-python3 package.py --version 1.0.0.0 --configuration Release --framework net9.0 --output dist
+python3 package.py --version 1.0.0.0 --source-url https://example.com/live-tv-collections-1.0.0.0.zip --configuration Release --framework net9.0 --output dist
 ```
 
 ## 6. Set Up Debugging
