@@ -22,8 +22,9 @@ public sealed class LiveTvCollectionSyncService : IHostedService, IDisposable
 {
     private const string M3uServiceName = "M3U Tuner";
     private const string CollectionNamePrefix = "TV - ";
-    private const string ProviderIdKey = "Jellyfin.Plugin.LiveTvCollections.GroupTitle";
+    private const string ProviderIdKey = "ChannelGroup";
     private const string RefreshChannelsTaskType = "Jellyfin.LiveTv.Channels.RefreshChannelsScheduledTask";
+    private const string RefreshGuideTaskType = "Jellyfin.LiveTv.Guide.RefreshGuideScheduledTask";
 
     private readonly ICollectionManager _collectionManager;
     private readonly ILibraryManager _libraryManager;
@@ -221,7 +222,10 @@ public sealed class LiveTvCollectionSyncService : IHostedService, IDisposable
 
     private void OnTaskCompleted(object? sender, TaskCompletionEventArgs e)
     {
-        if (!string.Equals(e.Task.ScheduledTask.GetType().FullName, RefreshChannelsTaskType, StringComparison.Ordinal))
+        var taskType = e.Task.ScheduledTask.GetType().FullName;
+
+        if (!string.Equals(taskType, RefreshChannelsTaskType, StringComparison.Ordinal)
+            && !string.Equals(taskType, RefreshGuideTaskType, StringComparison.Ordinal))
         {
             return;
         }
